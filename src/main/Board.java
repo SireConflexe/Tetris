@@ -12,6 +12,7 @@ public class Board {
 		this.boardgame= new char[r][c];
 		
 		//test affichage
+		
 		for(int i=0; i<this.rows;i++) {
 			for(int j=0;j<this.columns;j++) {
 				if(j==5 && i== 4) {
@@ -23,6 +24,8 @@ public class Board {
 	
 	public void displayBoard() {
 		
+		
+		System.out.println("|_______T__E__T__R__I__S_______|");
 		for(int i=0; i<this.rows;i++) {
 			System.out.print("|");
 			for(int j=0;j<this.columns;j++) {
@@ -36,8 +39,14 @@ public class Board {
 			}
 			System.out.println("|");
 		}
+		System.out.println("|______________________________|");
 	}
 	
+	
+	public void addForm(int pos_x, int pos_y) {
+		
+		this.boardgame[pos_x][pos_y]='X';
+	}
 	
 	public static void main(String[] args) {
 		

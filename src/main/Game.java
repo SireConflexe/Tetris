@@ -23,6 +23,8 @@ public class Game {
 		//call detectForm
 		//if true, call fixForm
 		
+		this.boardgame.displayBoard();
+		
 	}
 	
 	
@@ -38,5 +40,16 @@ public class Game {
 		
 	}
 	
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		
+		
+		Game superTetrisOfDoom = new Game();
+		superTetrisOfDoom.nextStep();
+	}
 	
 }
