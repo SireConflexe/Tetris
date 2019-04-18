@@ -2,14 +2,14 @@ package main;
 
 public class Board {
 
-	private char boardgame[][];
 	private int columns, rows;
+	private char boardgame[][];
 	
 	public Board(int c, int r) {
 		
 		this.columns=c;
 		this.rows=r;
-	
+		this.boardgame= new char[r][c];
 		
 		//test affichage
 		for(int i=0; i<this.rows;i++) {
@@ -24,12 +24,17 @@ public class Board {
 	public void displayBoard() {
 		
 		for(int i=0; i<this.rows;i++) {
-			System.out.println("|");
+			System.out.print("|");
 			for(int j=0;j<this.columns;j++) {
-				System.out.print(" "+this.boardgame[i][j]+" ");
+				if(this.boardgame[i][j]=='X'){
+					System.out.print(" "+this.boardgame[i][j]+" ");
+				}
+				else {
+					System.out.print("   ");
+				}
 				
 			}
-			System.out.print("|");
+			System.out.println("|");
 		}
 	}
 	
