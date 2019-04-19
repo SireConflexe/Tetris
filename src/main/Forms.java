@@ -14,7 +14,7 @@ public class Forms {
 			 {'0','1','2','0'},
 			 {'0','1','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("o1", new Form(o1));
+		allForms.put("o1", new Form(o1,1,2));
 		
 		//i 
 		char[][] i1 = 
@@ -22,14 +22,14 @@ public class Forms {
 			 {'1','1','2','1'},
 			 {'0','0','0','0'},
 			 {'0','0','0','0'}};
-		allForms.put("i1", new Form(i1));
+		allForms.put("i1", new Form(i1,1,2));
 		
 		char[][] i2 = 
 			{{'0','0','1','0'},
 			 {'0','0','2','0'},
 			 {'0','0','1','0'},
 			 {'0','0','1','0'}};
-		allForms.put("i2", new Form(i2));
+		allForms.put("i2", new Form(i2,1,2));
 		
 		//s
 		char[][] s1 = 
@@ -37,13 +37,13 @@ public class Forms {
 			 {'0','0','2','1'},
 			 {'0','1','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("s1", new Form(s1));
+		allForms.put("s1", new Form(s1,1,2));
 		char[][] s2 = 
 			{{'0','0','1','0'},
 			 {'0','0','2','1'},
 			 {'0','0','0','1'},
 			 {'0','0','0','0'}};
-		allForms.put("s2", new Form(s2));
+		allForms.put("s2", new Form(s2,1,2));
 		
 		//z
 		char[][] z1 = 
@@ -51,13 +51,13 @@ public class Forms {
 			 {'0','1','2','0'},
 			 {'0','0','1','1'},
 			 {'0','0','0','0'}};
-		allForms.put("s1", new Form(z1));
+		allForms.put("s1", new Form(z1,1,2));
 		char[][] z2 = 
 			{{'0','0','0','1'},
 			 {'0','0','2','1'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("s2", new Form(z2));
+		allForms.put("s2", new Form(z2,1,2));
 		
 		//l
 		char[][] l1 = 
@@ -65,25 +65,25 @@ public class Forms {
 			 {'0','1','2','1'},
 			 {'0','1','0','0'},
 			 {'0','0','0','0'}};
-		allForms.put("l1", new Form(l1));
+		allForms.put("l1", new Form(l1,1,2));
 		char[][] l2 = 
 			{{'0','0','1','0'},
 			 {'0','0','2','0'},
 			 {'0','0','1','1'},
 			 {'0','0','0','0'}};
-		allForms.put("l2", new Form(l2));
+		allForms.put("l2", new Form(l2,1,2));
 		char[][] l3 = 
 			{{'0','0','0','1'},
 			 {'0','1','2','1'},
 			 {'0','0','0','0'},
 			 {'0','0','0','0'}};
-		allForms.put("l3", new Form(l3));
+		allForms.put("l3", new Form(l3,1,2));
 		char[][] l4 = 
 			{{'0','1','1','0'},
 			 {'0','0','2','0'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("l4", new Form(l4));
+		allForms.put("l4", new Form(l4,1,2));
 		
 		//j
 		char[][] j1 = 
@@ -91,25 +91,25 @@ public class Forms {
 			 {'0','1','2','1'},
 			 {'0','0','0','1'},
 			 {'0','0','0','0'}};
-		allForms.put("j1", new Form(j1));
+		allForms.put("j1", new Form(j1,1,2));
 		char[][] j2 = 
 			{{'0','0','1','1'},
 			 {'0','0','2','0'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("j2", new Form(j2));
+		allForms.put("j2", new Form(j2,1,2));
 		char[][] j3 = 
 			{{'0','1','0','0'},
 			 {'0','1','2','1'},
 			 {'0','0','0','0'},
 			 {'0','0','0','0'}};
-		allForms.put("j3", new Form(j3));
+		allForms.put("j3", new Form(j3,1,2));
 		char[][] j4 = 
 			{{'0','0','1','0'},
 			 {'0','0','2','0'},
 			 {'0','1','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("j4", new Form(j4));
+		allForms.put("j4", new Form(j4,1,2));
 		
 		//T
 		char[][] t1 = 
@@ -117,25 +117,25 @@ public class Forms {
 			 {'0','1','2','1'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("t1", new Form(t1));
+		allForms.put("t1", new Form(t1,1,2));
 		char[][] t2 = 
 			{{'0','0','1','0'},
 			 {'0','0','2','1'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("t2", new Form(t2));
+		allForms.put("t2", new Form(t2,1,2));
 		char[][] t3 = 
 			{{'0','0','1','0'},
 			 {'0','1','2','1'},
 			 {'0','0','0','0'},
 			 {'0','0','0','0'}};
-		allForms.put("j3", new Form(t3));
+		allForms.put("t3", new Form(t3,1,2));
 		char[][] t4 = 
 			{{'0','0','1','0'},
 			 {'0','1','2','0'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("t4", new Form(t4));
+		allForms.put("t4", new Form(t4,1,2));
 		
 	}
 	

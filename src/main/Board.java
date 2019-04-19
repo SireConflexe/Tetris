@@ -8,6 +8,8 @@ public class Board {
 	private int pivotX,pivotY;
 	private Forms forms;
 	
+	private int SIZE = 4;
+	
 	public Board(int c, int r) {
 		
 		this.columns=c;
@@ -51,11 +53,11 @@ public class Board {
 	
 	void flood(int i, int j, int px, int py,String formKey, char value, boolean[][] visited)
 	{
-	    if(px < 0 || px >= this.columns || py < 0 || py >= this.rows || visited[px][py] || this.forms.allForms.get(formKey).template[px][py] == '0')
+	    if(px < 0 || px >= this.SIZE || py < 0 || py >= this.SIZE || visited[px][py] || this.forms.allForms.get(formKey).template[px][py] == '0')
 	        return;
 	 
 	    visited[px][py] = true;
-	    boardgame[j][i] = value;
+	    this.boardgame[i][j] = value;
 	 
 	    flood(i, j - 1, px, py - 1, formKey, value, visited);
 	    flood(i + 1, j, px + 1, py, formKey, value, visited);
@@ -65,10 +67,10 @@ public class Board {
 	
 	void floodFill(int i, int j, int px, int py, String formKey, char value)
 	{
-	    boolean [][] visited = new boolean[this.columns][this.rows];
+	    boolean [][] visited = new boolean[SIZE][SIZE];
 	 
-	    for(int l = 0; l < this.columns; ++l)
-	        for(int m = 0; m < this.rows; ++m)
+	    for(int l = 0; l < SIZE; ++l)
+	        for(int m = 0; m < SIZE; ++m)
 	            visited[l][m] = false;
 	 
 	    flood(i, j, px, py, formKey, value, visited);
@@ -77,15 +79,15 @@ public class Board {
 	void drawForm(String formKey){
 		
 		int x = this.forms.allForms.get(formKey).getPosX();
-		int y = this.forms.allForms.get(formKey).getPosxY();
-		floodFill(x, y, this.pivotX, this.pivotY, formKey, 'X');
+		int y = this.forms.allForms.get(formKey).getPosY();
+		floodFill(this.pivotX, this.pivotY,x, y, formKey, 'X');
 	}
 	void clearPiece(String formKey)
 	{
 		int x = this.forms.allForms.get(formKey).getPosX();
-		int y = this.forms.allForms.get(formKey).getPosxY();
+		int y = this.forms.allForms.get(formKey).getPosY();
 	 
-	    floodFill(x, y, this.pivotX, this.pivotY, formKey, ' ');
+	    floodFill(this.pivotX, this.pivotY, x, y,  formKey, ' ');
 	}
 	public void addForm(int pos_x, int pos_y) {
 		
@@ -103,6 +105,18 @@ public class Board {
 		
 		Board b = new Board(10,24);
 		
+		b.pivotY = 4;
+		b.drawForm("o1");
+		b.displayBoard();
+		
+		b.clearPiece("o1");
+		b.pivotX++;
+		b.drawForm("o1");
+		b.displayBoard();
+		
+		b.clearPiece("o1");
+		b.pivotX++;
+		b.drawForm("o1");
 		b.displayBoard();
 		
 		
