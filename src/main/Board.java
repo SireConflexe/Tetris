@@ -30,12 +30,7 @@ public class Board {
 		
 		for(int i=0; i<this.rows;i++) {
 			for(int j=0;j<this.columns;j++) {
-				if(i== 4) {
-					this.boardgame[i][j]='X';
-				}
-				else {
-					this.boardgame[i][j]='0';
-				}
+				this.boardgame[i][j]='0';
 			}
 		}
 	}
@@ -48,7 +43,7 @@ public class Board {
 			display+=("    |");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
-					display+="  "+this.boardgame[i][j]+"  ";
+					display+="   "+this.boardgame[i][j]+"   ";
 				}
 				else {
 					display+="       ";
@@ -57,7 +52,7 @@ public class Board {
 			}
 			display+="|\n";
 		}
-		display+="    |______________________________|\n";
+		display+="|---------------------------------------------|\n";
 		return display;
 		
 	}
@@ -65,6 +60,8 @@ public class Board {
 	//moving form
 	void flood(int i, int j, int px, int py,String formKey, char value, boolean[][] visited)
 	{
+		//System.out.println(i +" -> " + px);
+		//System.out.println(j +" -> " + py);
 	    if(px < 0 || px >= this.SIZE || py < 0 || py >= this.SIZE || visited[px][py] || this.forms.allForms.get(formKey).template[px][py] == '0')
 	        return;
 	 
@@ -80,12 +77,12 @@ public class Board {
 	//check collision
 	void flood(int i, int j, int px, int py, String formKey, boolean[][] visited)
 	{
-		//System.out.println(this.forms.allForms.get(formKey).template[px][py]);
-	    //System.out.println(px < 0 || px >= this.SIZE || py < 0 || py >= this.SIZE || visited[px][py] || this.forms.allForms.get(formKey).template[px][py] == '0');
-	    
+		//System.out.println(i + " with" + j + " and " + px + " with" + py  );
+		
 	    if(px < 0 || px >= this.SIZE || py < 0 || py >= this.SIZE || visited[px][py] || this.forms.allForms.get(formKey).template[px][py] == '0')
 	        return;
-	 
+	    
+	    
 	    visited[px][py] = true;
 	    
 	    if(i < 0 || i >= this.rows || j < 0 || j >= this.columns || boardgame[i][j] != '0')
@@ -144,18 +141,19 @@ public class Board {
 	    int posFormX = this.forms.allForms.get(this.currentForm).getPosX();
 	    int posFormY = this.forms.allForms.get(this.currentForm).getPosY();
 	    
-
 	    int nextOrientation = Integer.parseInt(this.currentForm.substring(1)) +1;
 	    String nextName = this.currentForm.substring(0,1) + String.valueOf(nextOrientation);
-	    //System.out.println(nextName);
+	    
 	    
 	    this.flagMovableRotable = true;
 	    if(this.forms.allForms.containsKey(nextName)) {
-	    	flood(posFormX, posFormY, this.pivotX, this.pivotY, nextName, visited);
+	    	flood( this.pivotX, this.pivotY,posFormX, posFormY, nextName, visited);
 	    }
 	    else {
-	    	flood(posFormX, posFormY, this.pivotX, this.pivotY, this.currentForm.substring(0,1) + String.valueOf(1), visited);
+	    	nextName = this.currentForm.substring(0,1) + String.valueOf(1);
+	    	flood( this.pivotX, this.pivotY, posFormX, posFormY, this.currentForm.substring(0,1) + String.valueOf(1), visited);
 	    }
+
 	    drawForm(this.currentForm);
 	    return this.flagMovableRotable;
 	}
@@ -165,7 +163,6 @@ public class Board {
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY))
 	    {
-	    	System.out.println("ok");
 	        clearPiece(this.currentForm);
 	        this.pivotX++;
 	        drawForm(this.currentForm); 
@@ -180,6 +177,8 @@ public class Board {
 	        this.pivotY--;
 	        drawForm(this.currentForm); 
 	    }
+	    
+	    
 	}
 	 
 	void moveCurrentPieceRight()
@@ -190,6 +189,28 @@ public class Board {
 		     this.pivotY++;
 		     drawForm(this.currentForm); 
 	    }
+	}
+	
+
+	void rotateCurrentPiece()
+	{
+	    if(isCurrentPieceRotable())
+	    {
+	        clearPiece(this.currentForm);
+
+	        int nextOrientation = Integer.parseInt(this.currentForm.substring(1)) +1;
+		    String nextName = this.currentForm.substring(0,1) + String.valueOf(nextOrientation);
+		    
+		    if(this.forms.allForms.containsKey(nextName)) {
+		    	this.currentForm = nextName;
+		    }
+		    else {
+		    	this.currentForm = this.currentForm.substring(0,1) + String.valueOf(1);
+		    }
+		    
+	        drawForm(this.currentForm);
+	    }
+	    
 	}
 	
 	void drawForm(String formKey){
@@ -208,6 +229,7 @@ public class Board {
 	
 	void newForm(String formKey)
 	{
+		System.out.println(formKey);
 	    this.pivotX = this.originX;
 	    this.pivotY = this.originY;
 	    this.drawForm(formKey);
@@ -219,39 +241,75 @@ public class Board {
 	}
 	
 	
-	public Form nextForm() {
+	public void nextForm() {
+		this.newForm(this.forms.randForm());
+	}
+	
+	void deleteLine(int y)
+	{
+	    clearPiece(this.currentForm);
+	    for(int j = y; j > 0; --j)
+	    {
+	        for(int i = 0; i < this.columns; ++i)
+	        {
+	        	boardgame[i][j] = boardgame[i][j-1];
+	        }      
+	    }	 
+	    drawForm(this.currentForm);
+	}
+	
+	int deletePossibleLines()
+	{
+	    int nbLinesDeleted = 0;
+	    for(int i = 0; i < this.rows; i++)
+	    {
+	        int j = 0;
+	        while(i < this.columns && boardgame[i][j] != '0') {
+	        	j++;
+	        }
+	        if(j == this.columns) 
+	        {
+	            nbLinesDeleted++;
+	            deleteLine(i);
+	        }
+	    }
+	    return nbLinesDeleted;
+	}
+	
+	void dropCurrentPiece()
+	{
 		
-		return this.forms.randForm();
+	    while(isCurrentPieceMovable(this.pivotX+1, this.pivotY))
+	    {
+	    	moveCurrentPieceDown(); 
+	    }
+	        
+	}
+	 
+	boolean isCurrentPieceFallen()
+	{
+	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY)) 
+	        return false; 
+	    return true;
+	}
+	 
+	boolean isGameOver()
+	{
+	    for(int i = 0; i < this.columns; ++i)
+	    {
+	        if(boardgame[0][i] != '0') 
+	            return true;
+	    }
+	    return false;
 	}
 	
 	public static void main(String[] args) {
-		
-		
 		Board b = new Board(10,24);
 		
-		b.newForm("o1");
+		b.newForm("i1");
+		b.rotateCurrentPiece();
 		b.moveCurrentPieceDown();
-		b.displayBoard();
-		
-		b.moveCurrentPieceDown();
-		b.displayBoard();
-		
-		b.moveCurrentPieceDown();
-		b.displayBoard();
-		//System.out.println(b.isCurrentPieceMovable(b.pivotX+1, b.pivotY));
-		//System.out.println(b.isCurrentPieceRotable());
-		
-		/*
-		b.clearPiece("o1");
-		b.pivotX++;
-		b.drawForm("o1");
-		b.displayBoard();
-		
-		b.clearPiece("o1");
-		b.pivotX++;
-		b.drawForm("o1");
-		b.displayBoard();
-        */
+		b.rotateCurrentPiece();
 		
 	}
 	
