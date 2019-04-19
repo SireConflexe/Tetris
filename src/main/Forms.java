@@ -138,4 +138,13 @@ public class Forms {
 		allForms.put("t4", new Form(t4));
 		
 	}
+	
+	
+	public Form randForm() {
+
+        String[] tab = new String[] { "o1", "i1", "s1", "z1", "l1", "j1", "t1" };
+		int rand = (int) (Math.random()*7);
+		
+		return this.allForms.get(tab[rand]);
+	}
 }

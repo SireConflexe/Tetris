@@ -92,6 +92,12 @@ public class Board {
 		this.boardgame[pos_x][pos_y]='X';
 	}
 	
+	
+	public Form nextForm() {
+		
+		return this.forms.randForm();
+	}
+	
 	public static void main(String[] args) {
 		
 		
