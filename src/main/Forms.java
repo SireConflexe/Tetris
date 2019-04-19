@@ -51,13 +51,13 @@ public class Forms {
 			 {'0','1','2','0'},
 			 {'0','0','1','1'},
 			 {'0','0','0','0'}};
-		allForms.put("s1", new Form(z1,1,2));
+		allForms.put("z1", new Form(z1,1,2));
 		char[][] z2 = 
 			{{'0','0','0','1'},
 			 {'0','0','2','1'},
 			 {'0','0','1','0'},
 			 {'0','0','0','0'}};
-		allForms.put("s2", new Form(z2,1,2));
+		allForms.put("z2", new Form(z2,1,2));
 		
 		//l
 		char[][] l1 = 
@@ -140,12 +140,12 @@ public class Forms {
 	}
 	
 	
-	public Form randForm() {
+	public String randForm() {
 
         String[] tab = new String[] { "o1", "i1", "s1", "z1", "l1", "j1", "t1" };
 		int rand = (int) (Math.random()*7);
 		
-		return this.allForms.get(tab[rand]);
+		return tab[rand];
 	}
 	
 }

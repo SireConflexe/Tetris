@@ -30,12 +30,7 @@ public class Board {
 		
 		for(int i=0; i<this.rows;i++) {
 			for(int j=0;j<this.columns;j++) {
-				if(i== 4) {
-					this.boardgame[i][j]='X';
-				}
-				else {
-					this.boardgame[i][j]='0';
-				}
+				this.boardgame[i][j]='0';
 			}
 		}
 	}
@@ -48,7 +43,7 @@ public class Board {
 			display+=("|");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
-					display+="  "+this.boardgame[i][j]+"  ";
+					display+="   "+this.boardgame[i][j]+"   ";
 				}
 				else {
 					display+="       ";
@@ -57,7 +52,7 @@ public class Board {
 			}
 			display+="|\n";
 		}
-		display+="|______________________________|\n";
+		display+="|---------------------------------------------|\n";
 		return display;
 		
 	}
@@ -168,13 +163,9 @@ public class Board {
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY))
 	    {
-	    	System.out.println("piece deplacé bas");
 	        clearPiece(this.currentForm);
 	        this.pivotX++;
 	        drawForm(this.currentForm); 
-	    }
-	    else {
-	    	System.out.println("piece non deplacé bas");
 	    }
 	}
 	 
@@ -182,12 +173,9 @@ public class Board {
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY - 1))
 	    {
-	    	System.out.println("piece deplacé gauche");
 	        clearPiece(this.currentForm);
 	        this.pivotY--;
 	        drawForm(this.currentForm); 
-	    }else {
-	    	System.out.println("piece non deplacé gauche");
 	    }
 	    
 	    
@@ -197,23 +185,17 @@ public class Board {
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY + 1))
 	    {
-	    	System.out.println("piece deplacé droite");
 	    	 clearPiece(this.currentForm);
 		     this.pivotY++;
 		     drawForm(this.currentForm); 
-	    }else {
-	    	System.out.println("piece non deplacé droite");
 	    }
 	}
 	
 
 	void rotateCurrentPiece()
 	{
-		
 	    if(isCurrentPieceRotable())
 	    {
-	    	System.out.println("piece tournée");
-	    	
 	        clearPiece(this.currentForm);
 
 	        int nextOrientation = Integer.parseInt(this.currentForm.substring(1)) +1;
@@ -226,11 +208,7 @@ public class Board {
 		    	this.currentForm = this.currentForm.substring(0,1) + String.valueOf(1);
 		    }
 		    
-		    
 	        drawForm(this.currentForm);
-	        
-	    }else {
-	    	System.out.println("piece non tournée");
 	    }
 	    
 	}
@@ -251,6 +229,7 @@ public class Board {
 	
 	void newForm(String formKey)
 	{
+		System.out.println(formKey);
 	    this.pivotX = this.originX;
 	    this.pivotY = this.originY;
 	    this.drawForm(formKey);
@@ -262,9 +241,8 @@ public class Board {
 	}
 	
 	
-	public Form nextForm() {
-		
-		return this.forms.randForm();
+	public void nextForm() {
+		this.newForm(this.forms.randForm());
 	}
 	
 	void deleteLine(int y)
@@ -283,26 +261,29 @@ public class Board {
 	int deletePossibleLines()
 	{
 	    int nbLinesDeleted = 0;
-	    for(int j = 0; j < this.rows; ++j)
+	    for(int i = 0; i < this.rows; i++)
 	    {
-	        int i = 0;
-	 
-	        for(; i < this.columns && boardgame[i][j] != '0'; ++i);
-	 
-	        if(i == this.columns) 
+	        int j = 0;
+	        while(i < this.columns && boardgame[i][j] != '0') {
+	        	j++;
+	        }
+	        if(j == this.columns) 
 	        {
 	            nbLinesDeleted++;
-	            deleteLine(j);
+	            deleteLine(i);
 	        }
 	    }
-	 
 	    return nbLinesDeleted;
 	}
 	
 	void dropCurrentPiece()
 	{
-	    while(isCurrentPieceMovable(this.pivotX++, this.pivotY))
-	        moveCurrentPieceDown(); 
+		
+	    while(isCurrentPieceMovable(this.pivotX+1, this.pivotY))
+	    {
+	    	moveCurrentPieceDown(); 
+	    }
+	        
 	}
 	 
 	boolean isCurrentPieceFallen()
@@ -316,50 +297,19 @@ public class Board {
 	{
 	    for(int i = 0; i < this.columns; ++i)
 	    {
-	        if(boardgame[i][0] != '0') 
+	        if(boardgame[0][i] != '0') 
 	            return true;
 	    }
 	    return false;
 	}
 	
 	public static void main(String[] args) {
-		
-		
 		Board b = new Board(10,24);
 		
 		b.newForm("i1");
-
 		b.rotateCurrentPiece();
-
-		
 		b.moveCurrentPieceDown();
-		
 		b.rotateCurrentPiece();
-		
-		b.moveCurrentPieceLeft();
-		b.moveCurrentPieceLeft();
-		b.moveCurrentPieceLeft();
-		b.moveCurrentPieceLeft();
-		
-		System.out.println(b.displayBoard());
-		b.moveCurrentPieceRight();
-		b.rotateCurrentPiece();
-		System.out.println(b.pivotX);
-		System.out.println(b.pivotY);
-		
-		System.out.println(b.displayBoard());
-		
-		
-		/*
-		b.moveCurrentPieceDown();
-		System.out.println(b.displayBoard());
-		
-		b.moveCurrentPieceDown();
-		System.out.println(b.displayBoard());*/
-		
-		
-		//System.out.println(b.isCurrentPieceMovable(b.pivotX+1, b.pivotY));
-		//System.out.println(b.isCurrentPieceRotable());
 		
 	}
 	

@@ -22,9 +22,9 @@ public class Game {
 		
 		this.boardgame=new Board(10,24);
 		this.time_alive=0;
-		this.currentForm=this.boardgame.nextForm();
+		this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
-		this.frame.setTitle("Tetris tududu");
+		this.frame.setTitle("Tetris");
 		this.frame.setSize(300,500);
 		this.frame.setLocation(400, 200);
 		
@@ -34,7 +34,6 @@ public class Game {
 		this.frame.add(this.text);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setResizable(false);
-		System.out.println("salut");
 		
 		this.text.addKeyListener(new KeyListener() {
 			
@@ -54,20 +53,27 @@ public class Game {
 			public void keyPressed(KeyEvent e) {
 				int keyCode = e.getKeyCode();
 				switch( keyCode ) {
-		        	case 38:
+		        	case KeyEvent.VK_UP:
 		        		System.out.println("UP");
+		        		boardgame.rotateCurrentPiece();
+		        		
 		        		break;
 			        case KeyEvent.VK_DOWN:
 		        		System.out.println("DOWN");
+		        		boardgame.moveCurrentPieceDown();
+		        		
 			            break;
 			        case KeyEvent.VK_LEFT:
 		        		System.out.println("LEFT");
+		        		boardgame.moveCurrentPieceLeft();
 			            break;
 			        case KeyEvent.VK_RIGHT :
 		        		System.out.println("RIGHT");
+		        		boardgame.moveCurrentPieceRight();
 			        	break;
-			        case KeyEvent.VK_ESCAPE:
-			        	System.out.println("Escape");
+			        case KeyEvent.VK_SPACE:
+			        	System.out.println("SPACE");
+			        	boardgame.dropCurrentPiece();
 			        	break;
 				}
 				
@@ -76,64 +82,36 @@ public class Game {
 		this.frame.setFocusable(true);
 		this.frame.requestFocusInWindow();
 		this.frame.setVisible(true);
-		
 	}
-	
-	
+
 	//called every second
-	public void nextStep() {
+	public boolean nextStep() {
 		
 		time_alive++;
 		
-		
-		if(this.detectForm()) {
-			
-			this.fixForm();
-
-			this.currentForm=this.boardgame.nextForm();
+		if(this.boardgame.isCurrentPieceFallen())
+		{
+			System.out.println("fallen");
+			this.boardgame.deletePossibleLines();
+			if(this.boardgame.isGameOver())
+			{
+				this.text.setText(this.boardgame.displayBoard()+"\n \n              GAME OVER NULLOS");
+				return false;
+			}
+			this.boardgame.nextForm();
 		}
-		
 		else {
-			//en cran en bas
+			this.boardgame.moveCurrentPieceDown();
 		}
 		
-		
-		this.text.setText(this.boardgame.displayBoard()+"2");
-		
+		this.text.setText(this.boardgame.displayBoard());
+		return true;
 	}
-	
-	
-	//Detect if current playable form will be in contact with a solid form at next step
-	public boolean detectForm() {
-		
-		
-		return false;
-	}
-	
-	
-	//fix current if solid form detected
-	public void fixForm() {
-		
-		
-		
-		
-	}
-	
-
-
-	
-	
-	
-	
-	
 	
 	public static void main(String[] args) throws InterruptedException {
-		
-		
-		Game superTetrisOfDoom = new Game();
-		while(true) {
-			Thread.sleep(10000);
-			//superTetrisOfDoom.nextStep();
+		Game game = new Game();
+		while(game.nextStep()) {
+			Thread.sleep(400);
 		}
 	}
 
