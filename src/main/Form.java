@@ -2,16 +2,18 @@ package main;
 
 public class Form {
 	char [][] template;
-	private int posX,posxY;
-	Form(char[][] template)
+	private int posX,posY;
+	Form(char[][] template,int posX,int posY)
 	{
 		this.template = template;
+		this.posX = posX;
+		this.posY = posY;
 	}
 	public int getPosX() {
 		return posX;
 	}
-	public int getPosxY() {
-		return posxY;
+	public int getPosY() {
+		return posY;
 	}
 	
 }
