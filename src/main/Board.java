@@ -31,24 +31,26 @@ public class Board {
 		}
 	}
 	
-	public void displayBoard() {
+	public String displayBoard() {
 		
-		
-		System.out.println("|_______T__E__T__R__I__S_______|");
+		String display = new String();
+		display+="|_______T__E__T__R__I__S_______|\n";
 		for(int i=0; i<this.rows;i++) {
-			System.out.print("|");
+			display+=("|");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
-					System.out.print(" "+this.boardgame[i][j]+" ");
+					display+="  "+this.boardgame[i][j]+"  ";
 				}
 				else {
-					System.out.print("   ");
+					display+="       ";
 				}
 				
 			}
-			System.out.println("|");
+			display+="|\n";
 		}
-		System.out.println("|______________________________|");
+		display+="|______________________________|\n";
+		return display;
+		
 	}
 	
 	void flood(int i, int j, int px, int py,String formKey, char value, boolean[][] visited)
