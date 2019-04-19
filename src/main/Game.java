@@ -25,7 +25,7 @@ public class Game {
 		this.currentForm=this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
 		this.frame.setTitle("Tetris tududu");
-		this.frame.setSize(980,640);
+		this.frame.setSize(300,500);
 		this.frame.setLocation(400, 200);
 		
 		this.text = new JTextPane();
@@ -65,6 +65,9 @@ public class Game {
 			            break;
 			        case KeyEvent.VK_RIGHT :
 		        		System.out.println("RIGHT");
+			        	break;
+			        case KeyEvent.VK_ESCAPE:
+			        	System.out.println("Escape");
 			        	break;
 				}
 				
