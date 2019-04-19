@@ -64,7 +64,7 @@ public class Game {
 		        		System.out.println("LEFT");
 			            break;
 			        case KeyEvent.VK_RIGHT :
-		        		System.out.println("RIGHT");
+		        		System.out.println("RIGHT");	
 			        	break;
 			        case KeyEvent.VK_ESCAPE:
 			        	System.out.println("Escape");
@@ -122,7 +122,9 @@ public class Game {
 
 
 	
-	
+	public Board getBoard() {
+		return this.boardgame;
+	}
 	
 	
 	

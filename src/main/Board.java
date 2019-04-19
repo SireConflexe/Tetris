@@ -43,9 +43,9 @@ public class Board {
 	public String displayBoard() {
 		
 		String display = new String();
-		display+="|_______T__E__T__R__I__S_______|\n";
+		display+="    |_______T__E__T__R__I__S_______|\n";
 		for(int i=0; i<this.rows;i++) {
-			display+=("|");
+			display+=("    |");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
 					display+="  "+this.boardgame[i][j]+"  ";
@@ -57,7 +57,7 @@ public class Board {
 			}
 			display+="|\n";
 		}
-		display+="|______________________________|\n";
+		display+="    |______________________________|\n";
 		return display;
 		
 	}
