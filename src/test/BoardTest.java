@@ -1,9 +1,23 @@
 package test;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import main.Board;
+
 public class BoardTest {
+	
+	@Test
+	public void should_beAnArrayOf10x24_when_newBoard10x24() {
+		int c = 10;
+		int r = 24;
+		
+		Board b = new Board(c, r);
+		assertEquals(b.getBoardgame().length, r);
+		for (char[] row : b.getBoardgame()) {
+			assertEquals(row.length, c);
+		}
+	}
 	
 	//General
 	//test de taille du tableau lors de la creation

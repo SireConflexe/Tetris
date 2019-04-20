@@ -11,8 +11,6 @@ import main.Game;
 
 
 public class GameTest {
-
-	
 	
 	@Test
 	public void testCreate() {
