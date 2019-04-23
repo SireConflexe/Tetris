@@ -32,20 +32,19 @@ public class Board {
 	
 	public String displayBoard() {
 		String display = new String();
-		display+="    |_______T__E__T__R__I__S_______|\n";
+		display+="    |_______T__E__T__R__I__S_______\n";
 		for(int i=0; i<this.rows;i++) {
-			display+=("    |");
+			display+=("|\n    |");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
-					display+="   "+this.boardgame[i][j]+"   ";
+					display+="  "+this.boardgame[i][j]+"  ";
 				}
 				else {
 					display+="       ";
 				}
 			}
-			display+="|\n";
 		}
-		display+="|---------------------------------------------|\n";
+		display+="|\n |---------------------------------------------|\n";
 		return display;
 		
 	}
@@ -251,7 +250,7 @@ public class Board {
 	    return nbLinesDeleted;
 	}
 	
-	void dropCurrentPiece()
+	public void dropCurrentPiece()
 	{
 		
 	    while(isCurrentPieceMovable(this.pivotX+1, this.pivotY))
@@ -268,7 +267,7 @@ public class Board {
 	    return true;
 	}
 	 
-	boolean isGameOver()
+	public boolean isGameOver()
 	{
 	    for(int i = 0; i < this.columns; ++i)
 	    {

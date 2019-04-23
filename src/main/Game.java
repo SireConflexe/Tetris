@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Font;
 import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,11 +12,11 @@ import java.awt.event.KeyListener;
 
 public class Game {
 
-	private Board boardgame;
+	public Board boardgame;
 	private Form currentForm;
 	private int time_alive;
 	static GraphicsConfiguration gc;
-	JFrame frame;
+	public JFrame frame;
 	JTextPane text;
 	
 	public Game() {
@@ -25,12 +26,14 @@ public class Game {
 		this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
 		this.frame.setTitle("Tetris");
-		this.frame.setSize(300,500);
+		this.frame.setSize(500,700);
 		this.frame.setLocation(400, 200);
 		
 		this.text = new JTextPane();
 		this.text.setEditable(false);
 		this.text.setText(this.boardgame.displayBoard());
+		Font f = new Font("Verdana", Font.BOLD, 12);
+		this.text.setFont(f);
 		this.frame.add(this.text);
 		this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.frame.setResizable(false);

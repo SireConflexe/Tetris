@@ -1,6 +1,13 @@
 package test;
 
 
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.awt.GraphicsConfiguration;
+
+import javax.swing.JFrame;
+
 //import static org.junit.Assert.assertThat;
 
 import  org.junit.Assert;	
@@ -10,35 +17,106 @@ import main.Board;
 import main.Game;
 
 
+
+
 public class GameTest {
+
+	
+	
+
+	static GraphicsConfiguration gc;
+	
+	
+	
 	
 	@Test
-	public void testCreate() {
+	public void should_beAnArrayOf10x24_when_newBoard10x24() {
+		int c = 10;
+		int r = 24;
 		
+		Board b = new Board(c, r);
+		assertEquals(b.getBoardgame().length, r);
+		for (char[] row : b.getBoardgame()) {
+			assertEquals(row.length, c);
+		}
+	}
+	
+	@Test
+	public void should_goRight_when_pressRightArrow() {
 		
 		Game g = new Game();
-		//	assertThat(g.getBoard()).isEqualTo(new Board(10,24));
+		
+	//	assertEquals
+	}
+	
+	@Test
+	public void should_goLeft_when_pressLeftArrow() {
+		
+		Game g = new Game();
+		
+	//	assertEquals
+	}
+	
+	@Test
+	public void should_goDown_when_pressDownArrow() {
+		
+		Game g = new Game();
+		
+	//	assertEquals
+	}
+	
+	@Test
+	public void should_Drop_when_pressSpaceBar() {
+		
+		Game g = new Game();
+		
+	//	assertEquals
+	}
+	
+	@Test
+	public void should_gameOver_when_formAtLastLine() {
+		
+		Game g = new Game();
+	
+		for(int i =0;i<8;i++) {
+			g.boardgame.dropCurrentPiece();
+		}
+		assertEquals(g.boardgame.isGameOver(),true);
+		
+	}
+	
+	@Test
+	public void should_goDown_when_nothingHappens() {
+		
+		Game g = new Game();
+		Board b = g.boardgame;
+
+		
+		for(int i=0;i<9999999;i++) {
+			i*=i;
+		}
+		
+		assertNotEquals(g.boardgame,b);
+			
 		
 		
-		//si keyboard pressé, changement de la currentform
+	}
+	
+	
+	@Test
+	public void should_displayGame_when_gameLaunching() {
 		
-		//si gameover, pas de nouvelle form
+		Game g = new Game();
 		
-		//si création de game, plateau de taille 10x24
 		
-		//si création de game, première pièce apparait
+		JFrame f = new JFrame(gc);
+		f.setTitle("Tetris");
+		f.setSize(500,700);
+		f.setLocation(400, 200);
 		
-		//si on ne touche à rien, la pièce descend (toutes les 1 secondes,  on utilise le thread.sleep)
 		
-		//si collision, la pièce ne bouge plus
-		
-		//si piece ne bouge pas, nouvelle piece
-		
-		//si keyboard pressé, piece vers le bas
-		
-		//si keyboard pressé, bouger horizontallement
-		
-		//si bloc fixé en haut, game over nullos
+		assertEquals(g.frame,f);
+	}
 		
 		
 		// BONUS : 2/4
@@ -58,6 +136,6 @@ public class GameTest {
 		 
 		
 		
-	}
+	
 	
 }
