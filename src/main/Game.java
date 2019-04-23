@@ -27,7 +27,7 @@ public class Game {
 		this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
 		this.frame.setTitle("Tetris");
-		this.frame.setSize(500,700);
+		this.frame.setSize(400,550);
 		this.frame.setLocation(400, 200);
 		
 		this.text = new JTextPane();
@@ -85,7 +85,10 @@ public class Game {
 			this.level = (int) this.nbOfLinesDeleted/10;
 			if(this.boardgame.isGameOver())
 			{
-				this.text.setText(this.boardgame.displayBoard()+"\n \n              GAME OVER");
+				String textD= this.boardgame.displayBoard();
+				textD+="                [  Level : "+this.level+"       Points : "+this.nbPoints+"    ]";
+				textD+="\n \n                        GAME OVER";
+				this.text.setText(textD);
 				return false;
 			}
 			this.boardgame.nextForm();
@@ -95,7 +98,7 @@ public class Game {
 		}
 		
 		String textD= this.boardgame.displayBoard();
-		textD+="        [  Level : "+this.level+"       Points : "+this.nbPoints+"    ]";
+		textD+="                [  Level : "+this.level+"       Points : "+this.nbPoints+"    ]";
 		this.text.setText(textD);
 		return true;
 	}
