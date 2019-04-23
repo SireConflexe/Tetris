@@ -145,7 +145,7 @@ public class Board {
 	}
 	
 
-	void moveCurrentPieceDown()
+	public void moveCurrentPieceDown()
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY))
 	    {
@@ -155,7 +155,7 @@ public class Board {
 	    }
 	}
 	 
-	void moveCurrentPieceLeft()
+	public void moveCurrentPieceLeft()
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY - 1))
 	    {
@@ -167,7 +167,7 @@ public class Board {
 	    
 	}
 	 
-	void moveCurrentPieceRight()
+	public void moveCurrentPieceRight()
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY + 1))
 	    {
@@ -208,7 +208,7 @@ public class Board {
 	    floodFill(this.pivotX, this.pivotY, this.forms.allForms.get(formKey).getPosX(), this.forms.allForms.get(formKey).getPosY(),  formKey, '0');
 	}
 	
-	void newForm(String formKey)
+	public void newForm(String formKey)
 	{
 	    this.pivotX = this.originX;
 	    this.pivotY = this.originY;
@@ -261,14 +261,14 @@ public class Board {
 	        
 	}
 	 
-	boolean isCurrentPieceFallen()
+	public boolean isCurrentPieceFallen()
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY)) 
 	        return false; 
 	    return true;
 	}
 	 
-	boolean isGameOver()
+	public boolean isGameOver()
 	{
 	    for(int i = 0; i < this.columns; ++i)
 	    {
@@ -282,5 +282,12 @@ public class Board {
 	public char[][] getBoardgame() {
 		return boardgame;
 	}
+	public int getPivotX() {
+		return pivotX;
+	}
+	public int getPivotY() {
+		return pivotY;
+	}
+
 	
 }

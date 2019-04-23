@@ -32,17 +32,50 @@ public class BoardTest {
 		}
 	}
 	
+	@Test
+	public void should_beMiddle_when_newForm() {
+		int c = 10;
+		int r = 24;
+		
+		int columnExpected = (int) c/2;
+		int rowExpected = 0;
+		
+		Board b = new Board(c, r);
+		b.nextForm();
+		assertEquals(rowExpected , b.getPivotX());
+		assertEquals(columnExpected, b.getPivotY());
+	}
+	
+	@Test
+	public void should_beCollided_when_atTheBottom() {
+		Board b = new Board(10, 24);
+		b.newForm("o1"); //The square in the game = 4x4 blocs so it needs to move down 22 times to reach the bottom
+		for (int i = 0; i < 22; i++) {
+			b.moveCurrentPieceDown();
+		}
+		assertEquals(true, b.isCurrentPieceFallen());
+	}
+	
+	@Test
+	public void should_beCollided_when_hitOtherForm() {
+		Board b = new Board(10, 24);
+		b.newForm("i1"); //Make a 4x1 bloc appears
+		for (int i = 0; i < 23; i++) {
+			b.moveCurrentPieceDown();
+		}
+		assertEquals(true, b.isCurrentPieceFallen());
+		
+		b.newForm("o1"); //Make a 4x1 bloc appears
+		for (int i = 0; i < 22; i++) {
+			b.moveCurrentPieceDown();
+		}
+		assertEquals(true, b.isCurrentPieceFallen());
+	}
+	
 	//General
-	//test de taille du tableau lors de la creation
-	//test rempli par des 0 lors de l'initialisation
-	
-	//test tous les templates sont composés de 4 blocs
-	
-	//test position d'une nouvelle piece est au milieu tout en haut
-	
+
 	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
 	
-	//test collision avec le bas du tableau fonction isPieceFallen
 	//test collision avec d'autres blocs fonction isPieceFallen
 	
 	//test suppression des lignes (une ligne)
