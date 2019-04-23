@@ -19,6 +19,19 @@ public class BoardTest {
 		}
 	}
 	
+	@Test
+	public void should_beFilledBy0_when_newBoard() {
+		int c = 10;
+		int r = 24;
+		
+		Board b = new Board(c, r);
+
+		for (char[] row : b.getBoardgame()) {
+			for(char ch : row)
+				assertEquals('0', ch);
+		}
+	}
+	
 	//General
 	//test de taille du tableau lors de la creation
 	//test rempli par des 0 lors de l'initialisation

@@ -4,7 +4,12 @@ import java.util.HashMap;
 
 public class Forms {
 	HashMap<String,Form> allForms;
-	Forms()
+	public HashMap<String, Form> getAllForms() {
+		return allForms;
+	}
+
+
+	public Forms()
 	{
 		allForms = new HashMap<>();
 		

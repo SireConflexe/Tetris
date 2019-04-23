@@ -2,6 +2,7 @@ package main;
 
 public class Form {
 	char [][] template;
+	
 	private int posX,posY;
 	Form(char[][] template,int posX,int posY)
 	{
@@ -16,4 +17,8 @@ public class Form {
 		return posY;
 	}
 	
+	//For test purpose
+	public char[][] getTemplate() {
+		return template;
+	}
 }
