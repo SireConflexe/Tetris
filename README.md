@@ -16,8 +16,10 @@ Dans ce projet, nous avons réalisé et testé :
 - l'augmentation de la difficulté par niveau plus rapide
 - l'affichage (en Swing)
 
-Méthode de test : JUnit
 Langage : JAVA
+
+Méthode de test : JUnit
+
 
 Contrôles :
 - Flèche droite/gauche : déplacement
