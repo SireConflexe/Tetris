@@ -163,10 +163,20 @@ public class BoardTest {
 	}
 
 
-	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
-
+	@Test
+	public void should_beGameOver_when_tabFull() {
+		Board b = new Board(5, 5);
+		
+		for (int i = 0; i < 5; i++) { 
+			b.newForm("i1"); //Make a 4x1 bloc appears
+			b.dropCurrentPiece();
+		}
+		assertEquals(true, b.isGameOver());
+	}
 	
-	//test game over derniere ligne
-	
-	
+	@Test
+	public void shouldNot_beGameOver_when_tabEmpty() {
+		Board b = new Board(5, 5);
+		assertEquals(false, b.isGameOver());
+	}
 }
