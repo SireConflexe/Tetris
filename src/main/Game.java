@@ -2,8 +2,6 @@ package main;
 
 import java.awt.GraphicsConfiguration;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 import java.awt.event.KeyEvent;
@@ -12,16 +10,16 @@ import java.awt.event.KeyListener;
 public class Game {
 
 	private Board boardgame;
-	private Form currentForm;
-	private int time_alive;
+	private int level, nbOfLinesDeleted, nbPoints;
 	static GraphicsConfiguration gc;
 	JFrame frame;
 	JTextPane text;
 	
 	public Game() {
-		
+		this.nbOfLinesDeleted = 0;
+		this.level = 0;
 		this.boardgame=new Board(10,24);
-		this.time_alive=0;
+
 		this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
 		this.frame.setTitle("Tetris");
@@ -36,47 +34,32 @@ public class Game {
 		this.frame.setResizable(false);
 		
 		this.text.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {}
 			
 			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+			public void keyReleased(KeyEvent e) {}
 			
 			@Override
 			public void keyPressed(KeyEvent e) {
 				int keyCode = e.getKeyCode();
 				switch( keyCode ) {
 		        	case KeyEvent.VK_UP:
-		        		System.out.println("UP");
 		        		boardgame.rotateCurrentPiece();
-		        		
 		        		break;
 			        case KeyEvent.VK_DOWN:
-		        		System.out.println("DOWN");
 		        		boardgame.moveCurrentPieceDown();
-		        		
 			            break;
 			        case KeyEvent.VK_LEFT:
-		        		System.out.println("LEFT");
 		        		boardgame.moveCurrentPieceLeft();
 			            break;
 			        case KeyEvent.VK_RIGHT :
-		        		System.out.println("RIGHT");
 		        		boardgame.moveCurrentPieceRight();
 			        	break;
 			        case KeyEvent.VK_SPACE:
-			        	System.out.println("SPACE");
 			        	boardgame.dropCurrentPiece();
 			        	break;
 				}
-				
 			}
 		});
 		this.frame.setFocusable(true);
@@ -87,15 +70,16 @@ public class Game {
 	//called every second
 	public boolean nextStep() {
 		
-		time_alive++;
-		
 		if(this.boardgame.isCurrentPieceFallen())
 		{
-			System.out.println("fallen");
-			this.boardgame.deletePossibleLines();
+			int nbOfLineDeletedCurrent = this.boardgame.deletePossibleLines();
+			int nbPointsCurrent =  ((int) (nbOfLineDeletedCurrent / 4))*800 + (nbOfLineDeletedCurrent - (int) (nbOfLineDeletedCurrent / 4) *4)*100;
+			this.nbPoints += nbPointsCurrent;
+			this.nbOfLinesDeleted += nbOfLineDeletedCurrent;
+			this.level = (int) this.nbOfLinesDeleted/10;
 			if(this.boardgame.isGameOver())
 			{
-				this.text.setText(this.boardgame.displayBoard()+"\n \n              GAME OVER NULLOS");
+				this.text.setText(this.boardgame.displayBoard()+"\n \n              GAME OVER");
 				return false;
 			}
 			this.boardgame.nextForm();
@@ -108,10 +92,14 @@ public class Game {
 		return true;
 	}
 	
+	public int getIntervalTime() {
+		return (400-this.level*10>0)?400-this.level*10:10;
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
 		Game game = new Game();
 		while(game.nextStep()) {
-			Thread.sleep(400);
+			Thread.sleep(game.getIntervalTime());
 		}
 	}
 

@@ -46,7 +46,7 @@ public class Board {
 			display+="|\n";
 		}
 		display+="|---------------------------------------------|\n";
-		System.out.println(display);
+		//System.out.println(display);
 		return display;
 		
 	}

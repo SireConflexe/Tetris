@@ -132,7 +132,6 @@ public class BoardTest {
 	public void should_move_when_notStuck() {
 		Board b = new Board(4, 5);
 		b.newForm("i1"); //Make a 4x1 bloc appears position : 0,2
-		b.displayBoard();
 		assertEquals(true, b.isCurrentPieceMovable(1, 2));
 	}
 	
@@ -166,9 +165,6 @@ public class BoardTest {
 
 	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
 
-	
-	//test déplacement horizontal
-	
 	
 	//test game over derniere ligne
 	
