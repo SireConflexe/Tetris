@@ -27,20 +27,6 @@ public class GameTest {
 	static GraphicsConfiguration gc;
 	
 	
-	
-	
-	@Test
-	public void should_beAnArrayOf10x24_when_newBoard10x24() {
-		int c = 10;
-		int r = 24;
-		
-		Board b = new Board(c, r);
-		assertEquals(b.getBoardgame().length, r);
-		for (char[] row : b.getBoardgame()) {
-			assertEquals(row.length, c);
-		}
-	}
-	
 	@Test
 	public void should_goRight_when_pressRightArrow() {
 		
@@ -116,6 +102,18 @@ public class GameTest {
 		
 		
 		assertEquals(g.frame,f);
+	}
+	
+	@Test
+	public void should_have100points_when_aLineIsOver() {
+		Game g = new Game();
+		assertEquals(100,g.getNbPoints(1));
+	}
+	
+	@Test
+	public void should_have900points_when_fiveLinesAreOver() {
+		Game g = new Game();
+		assertEquals(900,g.getNbPoints(5));
 	}
 		
 		

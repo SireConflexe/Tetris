@@ -11,18 +11,18 @@ import java.awt.event.KeyListener;
 public class Game {
 
 	public Board boardgame;
-	private Form currentForm;
-	private int time_alive;
-	private Board boardgame;
 	private int level, nbOfLinesDeleted, nbPoints;
 	static GraphicsConfiguration gc;
 	public JFrame frame;
 	JTextPane text;
 	
 	public Game() {
+		this(10,24);
+	}
+	public Game(int rows,int columns) {
 		this.nbOfLinesDeleted = 0;
 		this.level = 0;
-		this.boardgame=new Board(10,24);
+		this.boardgame=new Board(rows,columns);
 
 		this.boardgame.nextForm();
 		this.frame = new JFrame(gc);
@@ -79,7 +79,7 @@ public class Game {
 		if(this.boardgame.isCurrentPieceFallen())
 		{
 			int nbOfLineDeletedCurrent = this.boardgame.deletePossibleLines();
-			int nbPointsCurrent =  ((int) (nbOfLineDeletedCurrent / 4))*800 + (nbOfLineDeletedCurrent - (int) (nbOfLineDeletedCurrent / 4) *4)*100;
+			int nbPointsCurrent =  this.getNbPoints(nbOfLineDeletedCurrent);
 			this.nbPoints += nbPointsCurrent;
 			this.nbOfLinesDeleted += nbOfLineDeletedCurrent;
 			this.level = (int) this.nbOfLinesDeleted/10;
@@ -96,6 +96,11 @@ public class Game {
 		
 		this.text.setText(this.boardgame.displayBoard());
 		return true;
+	}
+	
+	public int getNbPoints(int nbLinesDeleted)
+	{
+		return ((int) (nbLinesDeleted / 4))*800 + (nbLinesDeleted - (int) (nbLinesDeleted / 4) *4)*100;
 	}
 	
 	public int getIntervalTime() {
