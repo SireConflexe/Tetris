@@ -44,7 +44,8 @@ public class Board {
 				}
 			}
 		}
-		display+="|\n |---------------------------------------------|\n";
+		display+="|---------------------------------------------|\n";
+		//System.out.println(display);
 		return display;
 		
 	}
@@ -95,7 +96,7 @@ public class Board {
 	    flood(i, j, px, py, formKey, value, visited);
 	}
 	
-	boolean isCurrentPieceMovable(int i, int j)
+	public boolean isCurrentPieceMovable(int i, int j)
 	{
 	    clearForm(this.currentForm);
 
@@ -113,7 +114,7 @@ public class Board {
 	    drawForm(this.currentForm);
 	    return this.flagMovableRotable;
 	}
-	boolean isCurrentPieceRotable()
+	public boolean isCurrentPieceRotable()
 	{
 	    clearForm(this.currentForm);
 	 
@@ -144,7 +145,7 @@ public class Board {
 	}
 	
 
-	void moveCurrentPieceDown()
+	public void moveCurrentPieceDown()
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY))
 	    {
@@ -154,7 +155,7 @@ public class Board {
 	    }
 	}
 	 
-	void moveCurrentPieceLeft()
+	public void moveCurrentPieceLeft()
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY - 1))
 	    {
@@ -166,7 +167,7 @@ public class Board {
 	    
 	}
 	 
-	void moveCurrentPieceRight()
+	public void moveCurrentPieceRight()
 	{
 	    if(isCurrentPieceMovable(this.pivotX, this.pivotY + 1))
 	    {
@@ -177,7 +178,7 @@ public class Board {
 	}
 	
 
-	void rotateCurrentPiece()
+	public void rotateCurrentPiece()
 	{
 	    if(isCurrentPieceRotable())
 	    {
@@ -207,7 +208,7 @@ public class Board {
 	    floodFill(this.pivotX, this.pivotY, this.forms.allForms.get(formKey).getPosX(), this.forms.allForms.get(formKey).getPosY(),  formKey, '0');
 	}
 	
-	void newForm(String formKey)
+	public void newForm(String formKey)
 	{
 	    this.pivotX = this.originX;
 	    this.pivotY = this.originY;
@@ -221,27 +222,25 @@ public class Board {
 	
 	void deleteLine(int y)
 	{
-	    clearForm(this.currentForm);
-	    for(int j = y; j > 0; --j)
+	    for(int i = y; i > 0; --i)
 	    {
-	        for(int i = 0; i < this.columns; ++i)
+	        for(int j = 0; j < this.columns; ++j)
 	        {
-	        	boardgame[i][j] = boardgame[i][j-1];
+	        	boardgame[i][j] = boardgame[i-1][j];
 	        }      
 	    }	 
-	    drawForm(this.currentForm);
 	}
 	
-	int deletePossibleLines()
+	public int deletePossibleLines()
 	{
 	    int nbLinesDeleted = 0;
 	    for(int i = 0; i < this.rows; i++)
 	    {
 	        int j = 0;
-	        while(i < this.columns && boardgame[i][j] != '0') {
+	        while(j < this.columns && boardgame[i][j] != '0') {
 	        	j++;
 	        }
-	        if(j == this.columns) 
+	        if(j == this.columns ) 
 	        {
 	            nbLinesDeleted++;
 	            deleteLine(i);
@@ -260,7 +259,7 @@ public class Board {
 	        
 	}
 	 
-	boolean isCurrentPieceFallen()
+	public boolean isCurrentPieceFallen()
 	{
 	    if(isCurrentPieceMovable(this.pivotX + 1, this.pivotY)) 
 	        return false; 
@@ -281,5 +280,12 @@ public class Board {
 	public char[][] getBoardgame() {
 		return boardgame;
 	}
+	public int getPivotX() {
+		return pivotX;
+	}
+	public int getPivotY() {
+		return pivotY;
+	}
+
 	
 }
