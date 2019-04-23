@@ -120,13 +120,52 @@ public class BoardTest {
 		}
 		assertEquals(4, nbOfLinesDeleted);
 	}
+	
+	@Test
+	public void shouldNot_move_when_stuck() {
+		Board b = new Board(4, 5);
+		b.newForm("i1"); //Make a 4x1 bloc appears position : 0,2
+		assertEquals(false, b.isCurrentPieceMovable(0, 3));
+	}
+	
+	@Test
+	public void should_move_when_notStuck() {
+		Board b = new Board(4, 5);
+		b.newForm("i1"); //Make a 4x1 bloc appears position : 0,2
+		b.displayBoard();
+		assertEquals(true, b.isCurrentPieceMovable(1, 2));
+	}
+	
+	
+	@Test
+	public void should_rotate_when_notStuck() {
+		Board b = new Board(4, 5);
+		b.newForm("i1"); //Make a 4x1 bloc appears
+		b.moveCurrentPieceDown();
+		assertEquals(true, b.isCurrentPieceRotable());
+	}
+	
+	@Test
+	public void shouldNot_rotate_when_stuckWithBorder() {
+		Board b = new Board(4, 5);
+		b.newForm("i1"); //Make a 4x1 bloc appears
+		assertEquals(false, b.isCurrentPieceRotable());
+	}
+	
+	@Test
+	public void shouldNot_rotate_when_stuckWithAnOtherForm() {
+		Board b = new Board(5, 5);
+		b.newForm("o1"); //Make a 2x2 bloc appears
+		b.moveCurrentPieceRight();
+		b.dropCurrentPiece();
+		b.newForm("i1");
+		b.moveCurrentPieceDown();
+		assertEquals(false, b.isCurrentPieceRotable());
+	}
 
 
 	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
 
-	//test rotation avec un bloc courant 
-	//test rotation qui fait déborder
-	//test rotation qui fonctionne
 	
 	//test déplacement horizontal
 	

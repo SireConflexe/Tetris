@@ -97,7 +97,7 @@ public class Board {
 	    flood(i, j, px, py, formKey, value, visited);
 	}
 	
-	boolean isCurrentPieceMovable(int i, int j)
+	public boolean isCurrentPieceMovable(int i, int j)
 	{
 	    clearForm(this.currentForm);
 
@@ -115,7 +115,7 @@ public class Board {
 	    drawForm(this.currentForm);
 	    return this.flagMovableRotable;
 	}
-	boolean isCurrentPieceRotable()
+	public boolean isCurrentPieceRotable()
 	{
 	    clearForm(this.currentForm);
 	 
