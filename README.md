@@ -29,6 +29,4 @@ Afin de tester le jeux, nous avons du passé de nombreux attributs et fonctions 
 Nous n'avons pas pu tester les contrôles avec JUnit car ils appelent des KeyListener.
 
 
-Réalisé par :
-Thibaud Germain
-Valentin Detcheberry
+Réalisé par Thibaud Germain et Valentin Detcheberry
