@@ -28,7 +28,7 @@ Contrôles :
 - Barre d'espace : "drop" de la pièce
 
 
-Afin de tester le jeux, nous avons du passé de nombreux attributs et fonctions en publique.
+Afin de tester le jeu, nous avons du passer de nombreux attributs et fonctions en public.
 Nous n'avons pas pu tester les contrôles avec JUnit car ils appelent des KeyListener.
 
 
