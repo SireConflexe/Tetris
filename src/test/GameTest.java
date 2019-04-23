@@ -10,8 +10,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
-//import static org.junit.Assert.assertThat;
-
 import  org.junit.Assert;	
 import org.junit.jupiter.api.Test;	
 
@@ -25,8 +23,6 @@ public class GameTest {
 
 	
 	
-
-	static GraphicsConfiguration gc;
 	
 	@Test
 	public void should_goRight_when_pressRightArrow() {
@@ -111,6 +107,18 @@ public class GameTest {
 		Game g = new Game();
 		
 		assertEquals(g.frame.isVisible(),true);
+	}
+	
+	@Test
+	public void should_have100points_when_aLineIsOver() {
+		Game g = new Game();
+		assertEquals(100,g.getNbPoints(1));
+	}
+	
+	@Test
+	public void should_have900points_when_fiveLinesAreOver() {
+		Game g = new Game();
+		assertEquals(900,g.getNbPoints(5));
 	}
 		
 		
