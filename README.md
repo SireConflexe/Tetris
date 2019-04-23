@@ -1,7 +1,8 @@
 # Tetris
-Un tetris beau. Si vous voulez une version moche, veuillez visiter : https://github.com/Drainman/SirTet
 
-Ce Tetris est un projet de qualité logicielle. Il a pour but de s'exercer aux tests.
+
+Ce Tetris est un projet de qualité logiciel. Il a pour but de donner une solution au kata suivant :
+https://github.com/ygrenzinger/polytech-course-starter
 Il est primordial de se rendre compte qu'il est plus important d'avoir peu de code testé et fonctionnel que beaucoup de code non testé et  potentiellement bugué.
 
 Dans ce projet, nous avons réalisé et testé :
@@ -15,6 +16,7 @@ Dans ce projet, nous avons réalisé et testé :
 - l'affichage (en Swing)
 
 Méthode de test : JUnit
+Langage : JAVA
 
 Contrôles :
 Flèche droite/gauche : déplacement
