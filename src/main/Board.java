@@ -179,7 +179,7 @@ public class Board {
 	}
 	
 
-	void rotateCurrentPiece()
+	public void rotateCurrentPiece()
 	{
 	    if(isCurrentPieceRotable())
 	    {

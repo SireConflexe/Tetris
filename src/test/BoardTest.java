@@ -88,21 +88,42 @@ public class BoardTest {
 		Board b = new Board(4, 24);
 		b.newForm("i1"); //Make a 4x1 bloc appears
 		b.dropCurrentPiece();
-		b.deletePossibleLines();
+		int nbOfLinesDeleted = b.deletePossibleLines();
 		
 		for (char[] row : b.getBoardgame()) {
 			for(char ch : row)
 				assertEquals('0', ch);
 		}
+		assertEquals(1, nbOfLinesDeleted);
 	}
 	
-	//General
+	@Test
+	public void should_deleteFourLines_when_full() {
+		
+		Board b = new Board(5, 24);
+		for (int i = 0; i < 4; i++) {
+			b.newForm("i1"); //Make a 4x1 bloc appears
+			b.dropCurrentPiece();
+		}
+		b.newForm("i1"); //Make a 4x1 bloc appears to complete the previous 4x1 blocs
+		b.moveCurrentPieceDown();
+		b.rotateCurrentPiece();
+		b.moveCurrentPieceRight();
+		b.moveCurrentPieceRight(); //max to the right
+		b.dropCurrentPiece();
+
+		int nbOfLinesDeleted = b.deletePossibleLines();
+		
+		for (char[] row : b.getBoardgame()) {
+			for(char ch : row)
+				assertEquals('0', ch);
+		}
+		assertEquals(4, nbOfLinesDeleted);
+	}
+
 
 	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
-	
-	//test suppression des lignes (une ligne)
-	//test suppression des lignes (plusieurs lignes)
-	
+
 	//test rotation avec un bloc courant 
 	//test rotation qui fait déborder
 	//test rotation qui fonctionne
