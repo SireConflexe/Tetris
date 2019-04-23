@@ -1,7 +1,7 @@
 # Tetris
 
 
-Ce Tetris est un projet de qualité logiciel. Il a pour but de donner une solution au kata suivant :
+Ce Tetris est un projet de qualité logicielle. Il a pour but de donner une solution au kata suivant :
 https://github.com/ygrenzinger/polytech-course-starter
 
 Il est primordial de se rendre compte qu'il est plus important d'avoir peu de code testé et fonctionnel que beaucoup de code non testé et  potentiellement bugué.
@@ -20,10 +20,11 @@ Méthode de test : JUnit
 Langage : JAVA
 
 Contrôles :
-Flèche droite/gauche : déplacement
-Flèche haut : rotation
-Flèches bas : accélerer la pièce
-Barre d'espace : "drop" de la pièces
+- Flèche droite/gauche : déplacement
+- Flèche haut : rotation
+- Flèches bas : accélerer la pièce
+- Barre d'espace : "drop" de la pièce
+
 
 Afin de tester le jeux, nous avons du passé de nombreux attributs et fonctions en publique.
 Nous n'avons pas pu tester les contrôles avec JUnit car ils appelent des KeyListener.
