@@ -3,6 +3,7 @@
 
 Ce Tetris est un projet de qualité logiciel. Il a pour but de donner une solution au kata suivant :
 https://github.com/ygrenzinger/polytech-course-starter
+
 Il est primordial de se rendre compte qu'il est plus important d'avoir peu de code testé et fonctionnel que beaucoup de code non testé et  potentiellement bugué.
 
 Dans ce projet, nous avons réalisé et testé :
