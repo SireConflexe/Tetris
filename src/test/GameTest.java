@@ -17,7 +17,7 @@ public class GameTest {
 		
 		
 		Game g = new Game();
-	//	assertThat(g.getBoard()).isEqualTo(new Board(10,24));
+		//	assertThat(g.getBoard()).isEqualTo(new Board(10,24));
 		
 		
 		//si keyboard pressé, changement de la currentform
