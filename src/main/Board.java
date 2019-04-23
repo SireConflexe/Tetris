@@ -32,19 +32,21 @@ public class Board {
 	
 	public String displayBoard() {
 		String display = new String();
-		display+="    |_______T__E__T__R__I__S_______\n";
+		
+		display+="    |________T__E__T__R__I__S________";
 		for(int i=0; i<this.rows;i++) {
 			display+=("|\n    |");
 			for(int j=0;j<this.columns;j++) {
 				if(this.boardgame[i][j]=='X'){
-					display+="  "+this.boardgame[i][j]+"  ";
+					display+="  "+this.boardgame[i][j]+" |";
 				}
 				else {
 					display+="       ";
 				}
 			}
 		}
-		display+="|---------------------------------------------|\n";
+		display+="| \n    |-----------------------------------------------|\n";
+		
 		//System.out.println(display);
 		return display;
 		

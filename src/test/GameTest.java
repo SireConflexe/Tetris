@@ -5,6 +5,8 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.awt.GraphicsConfiguration;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
@@ -25,21 +27,6 @@ public class GameTest {
 	
 
 	static GraphicsConfiguration gc;
-	
-	
-	
-	
-	@Test
-	public void should_beAnArrayOf10x24_when_newBoard10x24() {
-		int c = 10;
-		int r = 24;
-		
-		Board b = new Board(c, r);
-		assertEquals(b.getBoardgame().length, r);
-		for (char[] row : b.getBoardgame()) {
-			assertEquals(row.length, c);
-		}
-	}
 	
 	@Test
 	public void should_goRight_when_pressRightArrow() {
@@ -78,10 +65,12 @@ public class GameTest {
 		
 		Game g = new Game();
 	
-		for(int i =0;i<8;i++) {
-			g.boardgame.dropCurrentPiece();
+		Board b = new Board(10, 24);
+		b.newForm("o1"); //The square in the game = 2x2 blocs so it needs to move down 22 times to reach the bottom
+		for (int i = 0; i < 22; i++) {
+			b.moveCurrentPieceDown();
 		}
-		assertEquals(g.boardgame.isGameOver(),true);
+		assertEquals(b.isGameOver(),true);
 		
 	}
 	
@@ -91,12 +80,16 @@ public class GameTest {
 		Game g = new Game();
 		Board b = g.boardgame;
 
+		CountDownLatch lock = new CountDownLatch(1);
 		
-		for(int i=0;i<9999999;i++) {
-			i*=i;
+		try {
+			lock.await(2000,TimeUnit.MILLISECONDS);
+
+	//		assertNotEquals(g.boardgame,b);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		assertNotEquals(g.boardgame,b);
 			
 		
 		
@@ -108,22 +101,22 @@ public class GameTest {
 		
 		Game g = new Game();
 		
+		assertEquals(g.frame.isVisible(),true);
+	}
+	
+	
+	@Test
+	public void should_display_when_gameRuning() {
 		
-		JFrame f = new JFrame(gc);
-		f.setTitle("Tetris");
-		f.setSize(500,700);
-		f.setLocation(400, 200);
+		Game g = new Game();
 		
-		
-		assertEquals(g.frame,f);
+		assertEquals(g.frame.isVisible(),true);
 	}
 		
 		
 		// BONUS : 2/4
 		
 		//si game lancé, affichage lancé (tester le jframe)
-		
-		// si keyboard pressé, drop the piece
 		
 		/* 
 		 * 

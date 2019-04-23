@@ -11,10 +11,8 @@ import java.awt.event.KeyListener;
 public class Game {
 
 	public Board boardgame;
-	private Form currentForm;
-	private int time_alive;
-	private Board boardgame;
-	private int level, nbOfLinesDeleted, nbPoints;
+	
+	public int level, nbOfLinesDeleted, nbPoints;
 	static GraphicsConfiguration gc;
 	public JFrame frame;
 	JTextPane text;
@@ -94,7 +92,9 @@ public class Game {
 			this.boardgame.moveCurrentPieceDown();
 		}
 		
-		this.text.setText(this.boardgame.displayBoard());
+		String textD= this.boardgame.displayBoard();
+		textD+="        [  Level : "+this.level+"       Points : "+this.nbPoints+"    ]";
+		this.text.setText(textD);
 		return true;
 	}
 	
