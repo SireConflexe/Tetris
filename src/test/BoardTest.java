@@ -49,7 +49,7 @@ public class BoardTest {
 	@Test
 	public void should_beCollided_when_atTheBottom() {
 		Board b = new Board(10, 24);
-		b.newForm("o1"); //The square in the game = 4x4 blocs so it needs to move down 22 times to reach the bottom
+		b.newForm("o1"); //The square in the game = 2x2 blocs so it needs to move down 22 times to reach the bottom
 		for (int i = 0; i < 22; i++) {
 			b.moveCurrentPieceDown();
 		}
@@ -60,23 +60,45 @@ public class BoardTest {
 	public void should_beCollided_when_hitOtherForm() {
 		Board b = new Board(10, 24);
 		b.newForm("i1"); //Make a 4x1 bloc appears
-		for (int i = 0; i < 23; i++) {
+		for (int i = 0; i < 23; i++) { // move 23 times 
 			b.moveCurrentPieceDown();
 		}
 		assertEquals(true, b.isCurrentPieceFallen());
 		
-		b.newForm("o1"); //Make a 4x1 bloc appears
-		for (int i = 0; i < 22; i++) {
+		b.newForm("o1"); //Make a 2x2 bloc appears
+		for (int i = 0; i < 21; i++) { // move 21 times (23-2)
 			b.moveCurrentPieceDown();
 		}
 		assertEquals(true, b.isCurrentPieceFallen());
 	}
 	
+	
+	@Test
+	public void should_beCollided_when_dropCurrentPiece() {
+		Board b = new Board(10, 24);
+		b.newForm("i1"); //Make a 4x1 bloc appears
+		b.dropCurrentPiece();
+		assertEquals(true, b.isCurrentPieceFallen());
+	}
+	
+	
+	@Test
+	public void should_deleteOneLine_when_aLineIsFull() {
+		
+		Board b = new Board(4, 24);
+		b.newForm("i1"); //Make a 4x1 bloc appears
+		b.dropCurrentPiece();
+		b.deletePossibleLines();
+		
+		for (char[] row : b.getBoardgame()) {
+			for(char ch : row)
+				assertEquals('0', ch);
+		}
+	}
+	
 	//General
 
 	//test remplissage (copie d'une empreinte d'une pièce dans l'aire de jeu) : Fonction flood de position avec un pivotX et pivotY donné
-	
-	//test collision avec d'autres blocs fonction isPieceFallen
 	
 	//test suppression des lignes (une ligne)
 	//test suppression des lignes (plusieurs lignes)

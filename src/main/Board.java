@@ -46,6 +46,7 @@ public class Board {
 			display+="|\n";
 		}
 		display+="|---------------------------------------------|\n";
+		System.out.println(display);
 		return display;
 		
 	}
@@ -222,27 +223,25 @@ public class Board {
 	
 	void deleteLine(int y)
 	{
-	    clearForm(this.currentForm);
-	    for(int j = y; j > 0; --j)
+	    for(int i = y; i > 0; --i)
 	    {
-	        for(int i = 0; i < this.columns; ++i)
+	        for(int j = 0; j < this.columns; ++j)
 	        {
-	        	boardgame[i][j] = boardgame[i][j-1];
+	        	boardgame[i][j] = boardgame[i-1][j];
 	        }      
 	    }	 
-	    drawForm(this.currentForm);
 	}
 	
-	int deletePossibleLines()
+	public int deletePossibleLines()
 	{
 	    int nbLinesDeleted = 0;
 	    for(int i = 0; i < this.rows; i++)
 	    {
 	        int j = 0;
-	        while(i < this.columns && boardgame[i][j] != '0') {
+	        while(j < this.columns && boardgame[i][j] != '0') {
 	        	j++;
 	        }
-	        if(j == this.columns) 
+	        if(j == this.columns ) 
 	        {
 	            nbLinesDeleted++;
 	            deleteLine(i);
@@ -251,7 +250,7 @@ public class Board {
 	    return nbLinesDeleted;
 	}
 	
-	void dropCurrentPiece()
+	public void dropCurrentPiece()
 	{
 		
 	    while(isCurrentPieceMovable(this.pivotX+1, this.pivotY))
